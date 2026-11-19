@@ -1,0 +1,15 @@
+
+> todo-app@0.1.0 test
+> vitest run
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v5.1.1 /home/vylt/Documents/Agent-project/todo-app
+
+
+ Test Files  4 passed (4)
+      Tests  20 passed (20)
+   Start at  17:51:59
+   Duration  139ms (tests 48%, import 30%, transform 13%, worker 9%)
+
+exit=0

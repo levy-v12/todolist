@@ -1,0 +1,9 @@
+{
+  "name": "welcome-sample",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Repo mẫu để chạy thử luồng nhiều agent: một trang web tĩnh.",
+  "scripts": {
+    "test": "node --test"
+  }
+}

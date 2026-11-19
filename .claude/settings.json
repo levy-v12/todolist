@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
+      "Bash(git rebase:*)",
+      "Bash(git branch -D:*)",
+      "Bash(git commit --amend:*)",
+      "Bash(sudo:*)",
+      "Bash(rm -rf:*)",
+      "Read(./**/.env)",
+      "Read(./**/.env.*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -I \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard.py\""
+          }
+        ]
+      }
+    ]
+  }
+}

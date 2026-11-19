@@ -1,0 +1,25 @@
+
+> welcome-sample@0.1.0 test
+> node --test
+
+✔ package.json khai báo lệnh test (0.612216ms)
+✔ README tồn tại (0.165944ms)
+✔ AC1: index.html là tài liệu HTML5 đúng cấu trúc (1.24032ms)
+✔ AC2: index.html liên kết styles.css và file tồn tại (0.195054ms)
+✔ AC2: nền trang là gradient, mọi điểm màu có hue 250-310 (0.629083ms)
+✔ AC3: màu được khai báo bằng custom properties trong :root (0.964104ms)
+✔ AC4: chữ h1, mô tả và nút đạt tương phản WCAG AA (4.5:1) (0.40136ms)
+✔ AC4: nút vẫn đạt 4.5:1 ở trạng thái :hover (0.113111ms)
+✔ AC4: hàm tính tương phản đúng với giá trị chuẩn (0.10497ms)
+✔ AC5: bố cục căn giữa và co giãn (0.203476ms)
+✔ AC6: nút có :hover và :focus-visible nhìn thấy được (0.168385ms)
+✔ AC7: không tham chiếu tài nguyên ngoài, không có script (0.31953ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 54.305544
+exit=0

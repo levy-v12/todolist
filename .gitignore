@@ -1,0 +1,9 @@
+# Bí mật: không bao giờ đưa lên git
+.env*
+!.env.example
+
+# Sản phẩm sinh ra khi cài đặt và build
+node_modules/
+.next/
+__pycache__/
+*.tsbuildinfo

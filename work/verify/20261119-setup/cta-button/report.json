@@ -1,0 +1,103 @@
+{
+  "steps": [
+    {
+      "step": "state=truoc",
+      "file": "truoc.json",
+      "ok": true
+    },
+    {
+      "step": "shot=truoc",
+      "file": "truoc.png",
+      "ok": true
+    },
+    {
+      "step": "hover=link:Bắt đầu ngay",
+      "ok": true
+    },
+    {
+      "step": "state=hover",
+      "file": "hover.json",
+      "ok": true
+    },
+    {
+      "step": "shot=hover",
+      "file": "hover.png",
+      "ok": true
+    },
+    {
+      "step": "assert=el(\"link\",\"Bắt đầu ngay\").matches.hover",
+      "value": true,
+      "ok": true
+    },
+    {
+      "step": "assert=el(\"link\",\"Bắt đầu ngay\").style.backgroundColor !== el(\"link\",\"Bắt đầu ngay\",S.truoc).style.backgroundColor",
+      "value": true,
+      "ok": true
+    },
+    {
+      "step": "assert=el(\"link\",\"Bắt đầu ngay\").rect.y < el(\"link\",\"Bắt đầu ngay\",S.truoc).rect.y",
+      "value": true,
+      "ok": true
+    },
+    {
+      "step": "unhover",
+      "ok": true
+    },
+    {
+      "step": "press=Tab",
+      "ok": true
+    },
+    {
+      "step": "state=focus",
+      "file": "focus.json",
+      "ok": true
+    },
+    {
+      "step": "shot=focus",
+      "file": "focus.png",
+      "ok": true
+    },
+    {
+      "step": "assert=s.focus === \"link:Bắt đầu ngay\" && el(\"link\",\"Bắt đầu ngay\").matches.focusVisible",
+      "value": true,
+      "ok": true
+    },
+    {
+      "step": "assert=el(\"link\",\"Bắt đầu ngay\").style.outlineStyle === \"solid\" && parseFloat(el(\"link\",\"Bắt đầu ngay\").style.outlineWidth) >= 2",
+      "value": true,
+      "ok": true
+    },
+    {
+      "step": "press=Enter",
+      "ok": true
+    },
+    {
+      "step": "state=sau-enter",
+      "file": "sau-enter.json",
+      "ok": true
+    },
+    {
+      "step": "assert=s.url.endsWith(\"#gioi-thieu\") && s.targetId === \"gioi-thieu\"",
+      "value": true,
+      "ok": true
+    }
+  ],
+  "requests": [
+    "file:///home/vylt/Documents/Agent-project/repo/src/index.html",
+    "file:///home/vylt/Documents/Agent-project/repo/src/styles.css"
+  ],
+  "loiTaiTaiNguyen": [],
+  "console": [],
+  "identity": {
+    "trang": "file:///home/vylt/Documents/Agent-project/repo/src/index.html",
+    "repo": "/home/vylt/Documents/Agent-project/repo",
+    "nhanh": "task/TASK-001",
+    "commit": "3425eb2",
+    "fileChuaCommit": 4,
+    "chrome": "Chrome/156.0.8078.79",
+    "node": "v24.18.0",
+    "luc": "2026-11-19T07:55:19.265Z"
+  },
+  "ketQua": "PASS",
+  "soBuocLoi": 0
+}

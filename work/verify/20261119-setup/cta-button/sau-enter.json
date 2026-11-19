@@ -1,0 +1,153 @@
+{
+  "url": "file:///home/vylt/Documents/Agent-project/repo/src/index.html#gioi-thieu",
+  "title": "Chào mừng bạn đến với Welcome Sample",
+  "lang": "vi",
+  "viewport": {
+    "width": 1280,
+    "height": 800
+  },
+  "cuonNgang": false,
+  "scrollWidth": 1280,
+  "body": {
+    "backgroundImage": "linear-gradient(135deg, rgb(76, 29, 149), rgb(91, 33, 182), rgb(109, 40, 217))",
+    "color": "rgb(255, 255, 255)"
+  },
+  "focus": null,
+  "targetId": "gioi-thieu",
+  "soScript": 0,
+  "stylesheets": [
+    "file:///home/vylt/Documents/Agent-project/repo/src/styles.css"
+  ],
+  "elements": [
+    {
+      "role": "main",
+      "name": "Chào mừng bạn đến với Welcome Sample Một trang web tĩnh gọn nhẹ, viết bằng HTML và CSS thuần, xem tốt trên cả điện thoại lẫn máy tính. Bắt đầu ngay",
+      "tag": "main",
+      "id": null,
+      "href": null,
+      "rect": {
+        "x": 320,
+        "y": 268.609375,
+        "width": 640,
+        "height": 262.78125
+      },
+      "lechTamNgang": 0,
+      "trongKhungNhin": true,
+      "style": {
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "16px",
+        "fontFamily": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "textAlign": "center",
+        "transform": "none",
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "matches": {
+        "hover": false,
+        "focusVisible": false,
+        "target": false
+      }
+    },
+    {
+      "role": "heading",
+      "name": "Chào mừng bạn đến với Welcome Sample",
+      "tag": "h1",
+      "id": null,
+      "href": null,
+      "rect": {
+        "x": 320,
+        "y": 268.609375,
+        "width": 640,
+        "height": 115.1875
+      },
+      "lechTamNgang": 0,
+      "trongKhungNhin": true,
+      "style": {
+        "color": "rgb(255, 255, 255)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "48px",
+        "fontFamily": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "textAlign": "center",
+        "transform": "none",
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(255, 255, 255)"
+      },
+      "matches": {
+        "hover": false,
+        "focusVisible": false,
+        "target": false
+      }
+    },
+    {
+      "role": "paragraph",
+      "name": "Một trang web tĩnh gọn nhẹ, viết bằng HTML và CSS thuần, xem tốt trên cả điện thoại lẫn máy tính.",
+      "tag": "p",
+      "id": "gioi-thieu",
+      "href": null,
+      "rect": {
+        "x": 320,
+        "y": 395.796875,
+        "width": 640,
+        "height": 57.59375
+      },
+      "lechTamNgang": 0,
+      "trongKhungNhin": true,
+      "style": {
+        "color": "rgb(245, 243, 255)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "18px",
+        "fontFamily": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "textAlign": "center",
+        "transform": "none",
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(245, 243, 255)"
+      },
+      "matches": {
+        "hover": false,
+        "focusVisible": false,
+        "target": true
+      }
+    },
+    {
+      "role": "link",
+      "name": "Bắt đầu ngay",
+      "tag": "a",
+      "id": null,
+      "href": "#gioi-thieu",
+      "rect": {
+        "x": 555.171875,
+        "y": 485.390625,
+        "width": 169.65625,
+        "height": 46
+      },
+      "lechTamNgang": 0,
+      "trongKhungNhin": true,
+      "style": {
+        "color": "rgb(76, 29, 149)",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "fontSize": "16px",
+        "fontFamily": "system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif",
+        "textAlign": "center",
+        "transform": "none",
+        "outlineStyle": "none",
+        "outlineWidth": "3px",
+        "outlineColor": "rgb(76, 29, 149)"
+      },
+      "matches": {
+        "hover": false,
+        "focusVisible": false,
+        "target": false
+      }
+    }
+  ],
+  "requests": [
+    "file:///home/vylt/Documents/Agent-project/repo/src/index.html",
+    "file:///home/vylt/Documents/Agent-project/repo/src/styles.css"
+  ],
+  "loiTaiTaiNguyen": [],
+  "console": []
+}

@@ -1,0 +1,15 @@
+# Đường dẫn cấm ghi tuyệt đối, tính từ thư mục gốc của Agent-project.
+# Mỗi dòng một mẫu glob. Dấu * khớp cả dấu /. Dòng bắt đầu bằng # là ghi chú.
+repo/.env*
+repo/*/.env*
+repo/.git/*
+# todo-app/.env.example được phép ghi (TASK-002, AC3), nên liệt kê từng tên thay vì todo-app/.env*
+todo-app/.env
+todo-app/.env.local
+todo-app/.env.*.local
+todo-app/.env.development
+todo-app/.env.production
+todo-app/.env.test
+todo-app/*/.env*
+todo-app/.git/*
+.env*
