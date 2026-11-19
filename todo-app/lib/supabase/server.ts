@@ -8,9 +8,9 @@ export async function createClient() {
   // Đọc cookies() trước: lúc build, Next.js dừng việc render tại đây (nội dung
   // phụ thuộc request), nên không đọc biến môi trường khi build.
   const cookieStore = await cookies();
-  const { url, anonKey } = getSupabaseEnv();
+  const { url, publishableKey } = getSupabaseEnv();
 
-  return createServerClient(url, anonKey, {
+  return createServerClient(url, publishableKey, {
     cookies: {
       getAll() {
         return cookieStore.getAll();

@@ -15,7 +15,7 @@ vi.mock("@/lib/supabase/server", () => ({
 }));
 vi.mock("next/navigation", () => ({ redirect }));
 
-import { authenticate } from "@/app/login/actions";
+import { signIn, signUp as register } from "@/app/login/actions";
 
 function form(fields: Record<string, string>) {
   const formData = new FormData();
@@ -23,15 +23,15 @@ function form(fields: Record<string, string>) {
   return formData;
 }
 
-describe("authenticate", () => {
+describe("signIn / signUp", () => {
   beforeEach(() => vi.clearAllMocks());
 
   it("đăng nhập thành công thì chuyển về /", async () => {
     signInWithPassword.mockResolvedValue({ error: null });
     await expect(
-      authenticate(
+      signIn(
         {},
-        form({ intent: "signin", email: "a@b.vn", password: "matkhau1" }),
+        form({ email: "a@b.vn", password: "matkhau1" }),
       ),
     ).rejects.toThrow("NEXT_REDIRECT:/");
   });
@@ -40,9 +40,9 @@ describe("authenticate", () => {
     signInWithPassword.mockResolvedValue({
       error: { code: "invalid_credentials" },
     });
-    const result = await authenticate(
-      {},
-      form({ intent: "signin", email: "a@b.vn", password: "sai" }),
+    const result = await signIn(
+        {},
+        form({ email: "a@b.vn", password: "sai" }),
     );
     expect(result.error).toBe("Email hoặc mật khẩu không đúng.");
     expect(redirect).not.toHaveBeenCalled();
@@ -53,9 +53,9 @@ describe("authenticate", () => {
       data: { session: null, user: { id: "u" } },
       error: null,
     });
-    const result = await authenticate(
-      {},
-      form({ intent: "signup", email: "a@b.vn", password: "matkhau1" }),
+    const result = await register(
+        {},
+        form({ email: "a@b.vn", password: "matkhau1" }),
     );
     expect(result.message).toMatch(/email/);
     expect(result.error).toBeUndefined();
@@ -68,15 +68,17 @@ describe("authenticate", () => {
       error: null,
     });
     await expect(
-      authenticate(
+      register(
         {},
-        form({ intent: "signup", email: "a@b.vn", password: "matkhau1" }),
+        form({ email: "a@b.vn", password: "matkhau1" }),
       ),
     ).rejects.toThrow("NEXT_REDIRECT:/");
   });
 
   it("thiếu email hoặc mật khẩu thì không gọi Supabase", async () => {
-    const result = await authenticate({}, form({ intent: "signin", email: "" }));
+    const result = await signIn(
+        {},
+        form({ email: "" }));
     expect(result.error).toBeTruthy();
     expect(signInWithPassword).not.toHaveBeenCalled();
   });

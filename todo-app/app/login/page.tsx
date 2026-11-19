@@ -1,7 +1,7 @@
-import { Suspense } from "react";
-import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
-import { LoginForm } from "./login-form";
+import Link from "next/link";
+import { AuthForm, authLinkClass } from "../auth-form";
+import { AuthPage } from "../auth-page";
+import { signIn } from "./actions";
 
 export const metadata = {
   title: "Đăng nhập - Việc cần làm",
@@ -9,21 +9,19 @@ export const metadata = {
 
 export default function LoginPage() {
   return (
-    <main className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center gap-6 px-4 py-10">
-      <h1 className="text-2xl font-semibold">Đăng nhập</h1>
-      <Suspense fallback={<p className="text-sm text-zinc-600">Đang tải...</p>}>
-        <LoginContent />
-      </Suspense>
-    </main>
+    <AuthPage title="Đăng nhập">
+      <AuthForm
+        action={signIn}
+        submitLabel="Đăng nhập"
+        passwordAutoComplete="current-password"
+      >
+        <p className="text-center text-sm text-zinc-700">
+          Chưa có tài khoản?{" "}
+          <Link href="/register" className={authLinkClass}>
+            Đăng ký
+          </Link>
+        </p>
+      </AuthForm>
+    </AuthPage>
   );
-}
-
-async function LoginContent() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (user) redirect("/");
-
-  return <LoginForm />;
 }

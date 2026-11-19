@@ -1,16 +1,17 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { authRedirectTarget } from "./auth-routes";
 import { getSupabaseEnv } from "./env";
 
 // Làm mới phiên đăng nhập ở mỗi request và chuyển hướng theo trạng thái đăng nhập.
 export async function updateSession(request: NextRequest) {
-  const { url, anonKey } = getSupabaseEnv();
+  const { url, publishableKey } = getSupabaseEnv();
 
   let response = NextResponse.next({ request });
   let authHeaders: Record<string, string> = {};
   let authCookies: { name: string; value: string; options: object }[] = [];
 
-  const supabase = createServerClient(url, anonKey, {
+  const supabase = createServerClient(url, publishableKey, {
     cookies: {
       getAll() {
         return request.cookies.getAll();
@@ -37,14 +38,9 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { pathname } = request.nextUrl;
-  const isLoginPage = pathname === "/login";
-
-  if (!user && !isLoginPage) {
-    return redirectWithSession(request, "/login", authCookies, authHeaders);
-  }
-  if (user && isLoginPage) {
-    return redirectWithSession(request, "/", authCookies, authHeaders);
+  const target = authRedirectTarget(request.nextUrl.pathname, !!user);
+  if (target) {
+    return redirectWithSession(request, target, authCookies, authHeaders);
   }
 
   return response;

@@ -4,8 +4,11 @@
 
 Hiện app có:
 
-- Trang `/login`: đăng nhập và đăng ký bằng email + mật khẩu.
+- Trang `/login`: đăng nhập bằng email + mật khẩu. Có liên kết sang `/register`.
+- Trang `/register`: đăng ký bằng email + mật khẩu. Có liên kết về `/login`.
 - Trang `/`: xem email đang đăng nhập, đăng xuất, thêm todo, xem danh sách todo của chính mình (mới nhất ở trên).
+
+`/login` và `/register` vào được khi chưa đăng nhập. Người đã đăng nhập vào hai trang này được chuyển về `/`. Chưa đăng nhập mà vào `/` thì được chuyển sang `/login`.
 
 Mọi truy vấn Supabase chạy phía server. Mỗi người chỉ thấy todo của mình nhờ Row Level Security.
 
@@ -29,7 +32,7 @@ App cần hai biến:
 | Biến | Ý nghĩa |
 |---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` | URL của project Supabase |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Khóa `anon` (public) của project Supabase |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Publishable key (công khai, dạng `sb_publishable_...`) của project Supabase |
 
 Tạo `.env.local` từ file mẫu:
 
@@ -37,16 +40,17 @@ Tạo `.env.local` từ file mẫu:
 cp .env.example .env.local
 ```
 
-Mở `.env.local` và điền giá trị, lấy trong Supabase tại Project Settings, API:
+Mở `.env.local` và điền giá trị. Lấy URL và Publishable key trong Supabase tại Project Settings, API Keys:
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=<URL project Supabase của bạn>
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<khóa anon của bạn>
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<publishable key của bạn>
 ```
 
 Lưu ý:
 
-- Chỉ dùng khóa `anon`. Không dùng khóa `service_role`.
+- Chỉ dùng Publishable key (`sb_publishable_...`). Không dùng khóa `service_role` hay secret key (`sb_secret_...`).
+- Không bao giờ đặt key bí mật vào biến có tiền tố `NEXT_PUBLIC_`.
 - Không commit `.env.local`. `.gitignore` đã bỏ qua mọi file `.env*` trừ `.env.example`.
 - Thiếu biến thì app báo lỗi nêu tên biến còn thiếu. Lỗi này xảy ra lúc xử lý request, không xảy ra lúc build.
 
@@ -81,10 +85,10 @@ Chạy lại file lần thứ hai sẽ lỗi vì bảng đã có.
 
 Supabase mặc định bật xác nhận email. Khi đó:
 
-1. Người dùng đăng ký ở `/login`. Chưa có phiên đăng nhập ngay.
-2. Trang `/login` hiện thông báo: "Đăng ký thành công. Vui lòng kiểm tra email để xác nhận tài khoản rồi đăng nhập."
-3. Người dùng bấm liên kết trong email xác nhận, rồi quay lại `/login` để đăng nhập.
-4. Nếu đăng nhập khi chưa xác nhận, trang hiện thông báo "Email chưa được xác nhận. Vui lòng kiểm tra hộp thư của bạn."
+1. Người dùng đăng ký ở `/register`. Chưa có phiên đăng nhập ngay.
+2. Trang `/register` hiện thông báo: "Đăng ký thành công. Vui lòng kiểm tra email để xác nhận tài khoản rồi đăng nhập."
+3. Người dùng bấm liên kết trong email xác nhận, rồi vào `/login` để đăng nhập.
+4. Nếu đăng nhập khi chưa xác nhận, trang `/login` hiện thông báo "Email chưa được xác nhận. Vui lòng kiểm tra hộp thư của bạn."
 
 Muốn đăng ký xong vào luôn, tắt xác nhận email trong Supabase (Authentication, cài đặt đăng nhập bằng Email). Khi đó đăng ký thành công sẽ chuyển thẳng về `/`.
 
@@ -96,7 +100,7 @@ App không có route riêng để xử lý liên kết xác nhận. Khi deploy, 
 2. Trên Vercel, tạo project mới từ repo đó. Next.js được nhận diện tự động, không cần cấu hình build riêng (lệnh build là `npm run build`). Nếu `todo-app/` không phải thư mục gốc của repo, đặt Root Directory thành `todo-app`.
 3. Trong Project Settings, Environment Variables, khai báo hai biến cho các môi trường cần dùng (Production, và Preview nếu có dùng):
    - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 4. Deploy. Nếu thêm hoặc đổi biến sau khi đã deploy, deploy lại để biến có hiệu lực.
 5. Đặt Site URL và Redirect URLs trong Supabase trỏ về địa chỉ Vercel của app (xem mục trên).
 
@@ -105,9 +109,11 @@ App không có route riêng để xử lý liên kết xác nhận. Khi deploy, 
 | Đường dẫn | Nội dung |
 |---|---|
 | `app/page.tsx` | Trang chủ `/` |
-| `app/login/` | Trang `/login` và Server Action đăng nhập, đăng ký, đăng xuất |
+| `app/login/` | Trang `/login` và Server Action `signIn`, `signUp`, `signOut` (`actions.ts`) |
+| `app/register/` | Trang `/register` |
+| `app/auth-page.tsx`, `app/auth-form.tsx` | Khung trang và form email + mật khẩu dùng chung cho `/login` và `/register` |
 | `app/actions.ts` | Server Action thêm todo |
-| `lib/supabase/` | Client Supabase phía server, đọc biến môi trường, làm mới phiên |
+| `lib/supabase/` | Client Supabase phía server, đọc biến môi trường, làm mới phiên, quy tắc chuyển hướng (`auth-routes.ts`) |
 | `proxy.ts` | Làm mới phiên và chuyển hướng theo trạng thái đăng nhập (Next.js 16 gọi là `proxy`, thay cho `middleware`) |
 | `supabase/migrations/` | File migration SQL |
 | `tests/` | Test vitest |

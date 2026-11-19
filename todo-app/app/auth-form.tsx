@@ -1,20 +1,29 @@
 "use client";
 
-import { useActionState } from "react";
-import { authenticate, type AuthState } from "./actions";
+import { useActionState, type ReactNode } from "react";
+import type { AuthState } from "./login/actions";
 
 const initialState: AuthState = {};
 
 const inputClass =
   "block w-full rounded-md border border-zinc-300 bg-white px-3 py-2 text-base text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600";
-const buttonClass =
-  "w-full rounded-md px-4 py-2 text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:cursor-not-allowed disabled:opacity-60";
 
-export function LoginForm() {
-  const [state, formAction, pending] = useActionState(
-    authenticate,
-    initialState,
-  );
+export const authLinkClass =
+  "rounded-sm font-medium text-blue-700 underline hover:text-blue-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600";
+
+// Form email + mật khẩu dùng chung; `action` là Server Action truyền từ trang.
+export function AuthForm({
+  action,
+  submitLabel,
+  passwordAutoComplete,
+  children,
+}: {
+  action: (prevState: AuthState, formData: FormData) => Promise<AuthState>;
+  submitLabel: string;
+  passwordAutoComplete: "current-password" | "new-password";
+  children?: ReactNode;
+}) {
+  const [state, formAction, pending] = useActionState(action, initialState);
 
   return (
     <form action={formAction} className="flex flex-col gap-4">
@@ -39,7 +48,7 @@ export function LoginForm() {
           id="password"
           name="password"
           type="password"
-          autoComplete="current-password"
+          autoComplete={passwordAutoComplete}
           required
           className={inputClass}
         />
@@ -56,26 +65,15 @@ export function LoginForm() {
         </p>
       ) : null}
 
-      <div className="flex flex-col gap-2">
-        <button
-          type="submit"
-          name="intent"
-          value="signin"
-          disabled={pending}
-          className={`${buttonClass} bg-blue-600 text-white hover:bg-blue-700`}
-        >
-          Đăng nhập
-        </button>
-        <button
-          type="submit"
-          name="intent"
-          value="signup"
-          disabled={pending}
-          className={`${buttonClass} border border-zinc-300 bg-white text-zinc-900 hover:bg-zinc-50`}
-        >
-          Đăng ký
-        </button>
-      </div>
+      <button
+        type="submit"
+        disabled={pending}
+        className="w-full rounded-md bg-blue-600 px-4 py-2 text-base font-medium text-white hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {submitLabel}
+      </button>
+
+      {children}
     </form>
   );
 }

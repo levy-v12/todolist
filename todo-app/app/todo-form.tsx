@@ -10,7 +10,7 @@ export function TodoForm() {
 
   return (
     <form action={formAction} className="flex flex-col gap-2">
-      <label htmlFor="title" className="text-sm font-medium text-zinc-800">
+      <label htmlFor="title" className="text-sm font-medium text-blue-800">
         Công việc mới
       </label>
       <div className="flex flex-col gap-2 sm:flex-row">
@@ -23,7 +23,7 @@ export function TodoForm() {
           defaultValue={state.title}
           autoComplete="off"
           aria-describedby={state.error ? "title-error" : undefined}
-          className="block w-full min-w-0 rounded-md border border-zinc-300 bg-white px-3 py-2 text-base text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+          className="block w-full min-w-0 rounded-md border border-blue-300 bg-white px-3 py-2 text-base text-zinc-900 focus-visible:border-blue-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
         />
         <button
           type="submit"

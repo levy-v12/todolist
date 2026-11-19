@@ -44,7 +44,7 @@ async function HomeContent() {
         </form>
       </header>
 
-      <h1 className="text-2xl font-semibold">Việc cần làm</h1>
+      <h1 className="text-2xl font-semibold text-blue-700">Việc cần làm</h1>
 
       <TodoForm />
 
@@ -59,7 +59,7 @@ async function HomeContent() {
           {todos.map((todo) => (
             <li
               key={todo.id}
-              className="break-words rounded-md border border-zinc-200 bg-white px-3 py-2 text-zinc-900"
+              className="break-words rounded-md border border-l-4 border-blue-200 border-l-blue-600 bg-blue-50 px-3 py-2 text-zinc-900"
             >
               {todo.title}
             </li>
